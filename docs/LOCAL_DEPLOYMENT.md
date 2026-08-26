@@ -26,6 +26,16 @@ python -m unittest discover -s backend/tests -p 'test_*.py'
 
 Run Terraform only from your local machine with your own AWS credentials.
 
+The dev environment uses remote state in your existing S3 bucket and a shared DynamoDB lock table:
+
+```text
+bucket: osikanyithedev-terraform-state-2026
+key:    school-management-system/dev/terraform.tfstate
+table:  osikanyithedev-terraform-locks
+```
+
+Before the first init, create the lock table once using the command in [TERRAFORM_STATE.md](TERRAFORM_STATE.md).
+
 ```bash
 cd infrastructure/terraform/environments/dev
 cp terraform.tfvars.example terraform.tfvars
@@ -43,7 +53,7 @@ If Vercel has a deployment URL, add it to `allowed_origins`, `auth_callback_urls
 Then:
 
 ```bash
-terraform init
+terraform init -reconfigure
 terraform fmt -recursive
 terraform validate
 terraform plan -out=tfplan

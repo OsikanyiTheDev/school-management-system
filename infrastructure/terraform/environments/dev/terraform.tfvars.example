@@ -7,7 +7,8 @@ owner       = "OsikanyiTheDev"
 media_bucket_name = "smis-media-ACCOUNT_ID-2026"
 
 allowed_origins = [
-  "http://localhost:3000"
+  "http://localhost:3000",
+  # "https://ghanaschoolmangement.vercel.app"
 ]
 
 # Must be globally unique if enabled. Example: "smis-dev-ACCOUNT_ID".
@@ -15,11 +16,13 @@ allowed_origins = [
 cognito_domain_prefix = ""
 
 auth_callback_urls = [
-  "http://localhost:3000/api/auth/callback"
+  "http://localhost:3000/api/auth/callback",
+  # "https://ghanaschoolmangement.vercel.app/api/auth/callback"
 ]
 
 auth_logout_urls = [
-  "http://localhost:3000/"
+  "http://localhost:3000/",
+  # "https://ghanaschoolmangement.vercel.app/"
 ]
 
 log_retention_days = 14
