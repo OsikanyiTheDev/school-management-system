@@ -46,9 +46,19 @@ Then redeploy. The build should use Next.js defaults.
 
 ## Environment variables
 
-For the current Phase 1 foundation UI, no AWS environment variables are required.
+Add these Vercel Production environment variables for the deployed dev backend:
 
-After the AWS backend is deployed locally with Terraform, add the eventual API/Cognito values in Vercel Production variables. The exact variable names will be documented when the frontend authentication flow is implemented.
+```env
+AUTH_BASE_URL=https://ghanaschoolmangement.vercel.app
+API_URL=https://6fi97qfd2c.execute-api.us-east-1.amazonaws.com
+NEXT_PUBLIC_API_URL=https://6fi97qfd2c.execute-api.us-east-1.amazonaws.com
+COGNITO_DOMAIN=https://smis-dev-360831508664.auth.us-east-1.amazoncognito.com
+COGNITO_CLIENT_ID=4nvgnjt6j6i3lmkioaqai135a4
+COGNITO_USER_POOL_ID=us-east-1_Mi0tQlCG6
+COGNITO_REGION=us-east-1
+```
+
+Redeploy Vercel after adding/changing environment variables.
 
 ## Redeploy after fixing settings
 

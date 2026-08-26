@@ -77,3 +77,15 @@ terraform apply tfplan
 - Least-privilege Lambda IAM role
 
 No EC2, NAT Gateway, RDS, ALB or VPC is required for the initial serverless foundation.
+
+## Authentication bootstrap
+
+After Terraform apply, add the deployed values to Vercel as described in [AUTHENTICATION.md](AUTHENTICATION.md), then redeploy the frontend.
+
+To make the first PlatformAdmin, sign up and confirm the user through Cognito, then run from the repository root:
+
+```bash
+scripts/bootstrap_platform_admin.sh your-email@example.com
+```
+
+See [BOOTSTRAP_PLATFORM_ADMIN.md](BOOTSTRAP_PLATFORM_ADMIN.md).

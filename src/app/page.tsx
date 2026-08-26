@@ -1,9 +1,12 @@
 import { AppShell } from "@/components/app-shell";
 import { architectureFlow, dashboardStats, foundationModules, roles } from "@/data/foundation";
+import { getSession } from "@/lib/auth";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const session = await getSession();
+
   return (
-    <AppShell>
+    <AppShell session={session}>
       <main>
         <section className="hero" id="overview">
           <p className="eyebrow"><span /> Phase 1 foundation</p>

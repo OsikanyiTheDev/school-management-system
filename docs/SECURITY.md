@@ -16,7 +16,7 @@ Amazon Cognito is the approved identity provider. The Terraform foundation creat
 - Role groups
 - Custom user attributes for `school_id` and `person_id`
 
-The frontend login flow will be added in Phase 1 after the infrastructure contract is stable.
+The frontend now uses Cognito Hosted UI authorization code + PKCE. ID/access tokens are stored in short-lived HTTP-only cookies by Next.js route handlers and are not exposed to browser JavaScript.
 
 ## Authorization
 
@@ -48,3 +48,15 @@ The S3 bucket is private by default:
 - GitHub Actions must validate Terraform, not apply it.
 - Review every Terraform plan before apply.
 - Do not introduce destructive infrastructure changes without explicit approval.
+
+## Bootstrap controls
+
+The first `PlatformAdmin` is assigned from a trusted local AWS CLI environment after the user has signed up and confirmed email in Cognito. This avoids a public self-service platform-admin endpoint.
+
+Use:
+
+```bash
+scripts/bootstrap_platform_admin.sh admin@example.com
+```
+
+Do not grant `PlatformAdmin` to normal school operators. School-specific admins should be represented as `SchoolAdmin` plus a school membership item.

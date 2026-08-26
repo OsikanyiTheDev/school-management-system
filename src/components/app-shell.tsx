@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Session } from "@/lib/auth";
 
 const nav = [
   "Overview",
@@ -12,7 +13,7 @@ const nav = [
   "Reports",
 ];
 
-export function AppShell({ children }: { children: React.ReactNode }) {
+export function AppShell({ children, session }: { children: React.ReactNode; session?: Session | null }) {
   return (
     <div className="app-shell">
       <aside className="sidebar" aria-label="Application navigation">
@@ -38,7 +39,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <strong>Production-ready school operations</strong>
             <span>Multi-tenant architecture · AWS serverless · Terraform</span>
           </div>
-          <a className="topbar-action" href="#roadmap">View roadmap</a>
+          <div className="topbar-actions">
+            <a className="topbar-action" href="#roadmap">View roadmap</a>
+            {session ? (
+              <Link className="topbar-action topbar-action-primary" href="/account">{session.email ?? "Account"}</Link>
+            ) : (
+              <Link className="topbar-action topbar-action-primary" href="/auth">Sign in</Link>
+            )}
+          </div>
         </header>
         {children}
       </div>

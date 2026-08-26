@@ -4,7 +4,7 @@ A production-oriented, cloud-based School Management Information System designed
 
 The system is being built to manage school setup, students, parents/guardians, teachers, classes, subjects, attendance, grades, examinations, fees, invoices, payments, receipts, dashboards, notifications, reports and documents.
 
-> **Status:** Phase 1 foundation is in progress. The repository is intentionally structured for real SaaS evolution, not as a single-school CRUD demo.
+> **Status:** Phase 1 foundation is deployed on Vercel and AWS dev. Cognito auth routes are implemented; first-admin bootstrap is local/operator controlled.
 
 ## Architecture
 
@@ -92,7 +92,7 @@ This structure keeps the Vercel frontend at the repository root while still sepa
 - [x] School setup APIs
 - [x] Academic year, term, class and subject create APIs
 - [x] Student, parent/guardian and teacher profile create APIs
-- [ ] Cognito-backed application login flow
+- [x] Cognito-backed application login/logout/session flow
 - [ ] Membership management and role linking APIs
 - [ ] List/get/update APIs for setup and people records
 
@@ -135,6 +135,21 @@ This structure keeps the Vercel frontend at the repository root while still sepa
 - Tenant administration
 - Stronger tenant isolation controls
 - Subscription architecture
+
+
+## Current dev deployment outputs
+
+```text
+Frontend:      https://ghanaschoolmangement.vercel.app
+API:           https://6fi97qfd2c.execute-api.us-east-1.amazonaws.com
+Cognito:       https://smis-dev-360831508664.auth.us-east-1.amazoncognito.com
+User pool ID:  us-east-1_Mi0tQlCG6
+App client ID: 4nvgnjt6j6i3lmkioaqai135a4
+DynamoDB:      smis-dev-app
+S3 bucket:     smis-media-360831508664-2026
+```
+
+Add the matching Vercel environment variables from [`docs/AUTHENTICATION.md`](docs/AUTHENTICATION.md), then redeploy Vercel before testing sign-in.
 
 ## Vercel deployment
 
@@ -224,7 +239,9 @@ See [`docs/SECURITY.md`](docs/SECURITY.md).
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
 - [`docs/DATA_MODEL.md`](docs/DATA_MODEL.md)
 - [`docs/API.md`](docs/API.md)
+- [`docs/AUTHENTICATION.md`](docs/AUTHENTICATION.md)
 - [`docs/AUTHORIZATION.md`](docs/AUTHORIZATION.md)
+- [`docs/BOOTSTRAP_PLATFORM_ADMIN.md`](docs/BOOTSTRAP_PLATFORM_ADMIN.md)
 - [`docs/ROADMAP.md`](docs/ROADMAP.md)
 - [`docs/SECURITY.md`](docs/SECURITY.md)
 - [`docs/LOCAL_DEPLOYMENT.md`](docs/LOCAL_DEPLOYMENT.md)
