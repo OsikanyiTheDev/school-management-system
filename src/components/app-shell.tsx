@@ -24,7 +24,21 @@ export function AppShell({ children, session }: { children: React.ReactNode; ses
             <small>School SaaS foundation</small>
           </span>
         </Link>
-        <nav>
+        <details className="mobile-menu">
+          <summary aria-label="Open navigation menu">
+            <span>Menu</span>
+            <b aria-hidden="true">☰</b>
+          </summary>
+          <nav className="mobile-menu-nav" aria-label="Mobile navigation">
+            {nav.map((item, index) => (
+              <a href={index === 0 ? "#overview" : "#roadmap"} key={item} className={index === 0 ? "active" : ""}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                {item}
+              </a>
+            ))}
+          </nav>
+        </details>
+        <nav className="sidebar-nav">
           {nav.map((item, index) => (
             <a href={index === 0 ? "#overview" : "#roadmap"} key={item} className={index === 0 ? "active" : ""}>
               <span>{String(index + 1).padStart(2, "0")}</span>
