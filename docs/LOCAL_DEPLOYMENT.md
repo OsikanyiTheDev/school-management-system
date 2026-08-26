@@ -26,15 +26,15 @@ python -m unittest discover -s backend/tests -p 'test_*.py'
 
 Run Terraform only from your local machine with your own AWS credentials.
 
-The dev environment uses remote state in your existing S3 bucket and a shared DynamoDB lock table:
+The dev environment uses remote state in your existing S3 bucket with native S3 lock files:
 
 ```text
-bucket: osikanyithedev-terraform-state-2026
-key:    school-management-system/dev/terraform.tfstate
-table:  osikanyithedev-terraform-locks
+bucket:  osikanyithedev-terraform-state-2026
+key:     school-management-system/dev/terraform.tfstate
+locking: use_lockfile = true
 ```
 
-Before the first init, create the lock table once using the command in [TERRAFORM_STATE.md](TERRAFORM_STATE.md).
+See [TERRAFORM_STATE.md](TERRAFORM_STATE.md).
 
 ```bash
 cd infrastructure/terraform/environments/dev

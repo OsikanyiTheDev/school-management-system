@@ -181,15 +181,15 @@ python -m unittest discover -s backend/tests -p 'test_*.py'
 
 Terraform is written by the project but applied by the operator locally.
 
-The dev environment uses S3 remote state and DynamoDB locking:
+The dev environment uses S3 remote state with native S3 lock files:
 
 ```text
 State bucket: osikanyithedev-terraform-state-2026
 State key:    school-management-system/dev/terraform.tfstate
-Lock table:   osikanyithedev-terraform-locks
+Locking:      use_lockfile = true
 ```
 
-Create the lock table once before the first init; see [`docs/TERRAFORM_STATE.md`](docs/TERRAFORM_STATE.md).
+See [`docs/TERRAFORM_STATE.md`](docs/TERRAFORM_STATE.md).
 
 ```bash
 cd infrastructure/terraform/environments/dev

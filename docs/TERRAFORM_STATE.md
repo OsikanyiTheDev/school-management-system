@@ -12,45 +12,26 @@ The state key is unique to this project. Do not reuse state keys from Accra Spac
 
 ## Locking
 
-A DynamoDB lock table is used for Terraform state locking:
+Terraform uses S3 native state locking for this backend:
+
+```hcl
+use_lockfile = true
+```
+
+This creates a temporary lock file next to the state object while Terraform is running. It avoids the deprecated `dynamodb_table` backend argument and does not require a separate DynamoDB lock table.
+
+Expected state objects:
 
 ```text
-table: osikanyithedev-terraform-locks
-key:   LockID
+school-management-system/dev/terraform.tfstate
+school-management-system/dev/terraform.tfstate.tflock   # only while Terraform is locked/running
 ```
 
-This table can be shared by multiple Terraform projects because Terraform stores the lock by state path. It is separate from application data tables.
-
-## One-time lock table creation
-
-Run this once from your local machine before the first `terraform init` that uses this backend:
-
-```bash
-aws dynamodb create-table \
-  --table-name osikanyithedev-terraform-locks \
-  --attribute-definitions AttributeName=LockID,AttributeType=S \
-  --key-schema AttributeName=LockID,KeyType=HASH \
-  --billing-mode PAY_PER_REQUEST \
-  --tags Key=Project,Value=TerraformState Key=Owner,Value=OsikanyiTheDev Key=ManagedBy,Value=aws-cli \
-  --region us-east-1
-
-aws dynamodb wait table-exists \
-  --table-name osikanyithedev-terraform-locks \
-  --region us-east-1
-```
-
-If the table already exists, AWS will return `ResourceInUseException`; that is safe. Continue to `terraform init -reconfigure`.
-
-## Verify backend resources
+## Verify backend bucket
 
 ```bash
 aws s3api head-bucket \
   --bucket osikanyithedev-terraform-state-2026
-
-aws dynamodb describe-table \
-  --table-name osikanyithedev-terraform-locks \
-  --region us-east-1 \
-  --query 'Table.{Name:TableName,Status:TableStatus,BillingMode:BillingModeSummary.BillingMode}'
 ```
 
 ## Initialize the dev environment
