@@ -1,0 +1,25 @@
+# Copy to terraform.tfvars locally. Do not commit real tfvars files.
+aws_region  = "us-east-1"
+environment = "dev"
+owner       = "OsikanyiTheDev"
+
+# Must be globally unique.
+media_bucket_name = "smis-media-ACCOUNT_ID-2026"
+
+allowed_origins = [
+  "http://localhost:3000"
+]
+
+# Must be globally unique if enabled. Example: "smis-dev-ACCOUNT_ID".
+# Leave empty until you are ready to configure Hosted UI.
+cognito_domain_prefix = ""
+
+auth_callback_urls = [
+  "http://localhost:3000/api/auth/callback"
+]
+
+auth_logout_urls = [
+  "http://localhost:3000/"
+]
+
+log_retention_days = 14

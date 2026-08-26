@@ -1,0 +1,39 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# environment
+.env
+.env.local
+.env*.local
+
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+!*.tfvars.example
+tfplan
+*.zip
+
+# builds / coverage
+coverage/
+dist/
+build/
+
+# editor / os
+.DS_Store
+.idea/
+.vscode/
