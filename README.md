@@ -146,10 +146,10 @@ Root Directory: frontend
 Framework Preset: Next.js
 Install Command: npm ci
 Build Command: npm run build
-Output Directory: leave blank
+Output Directory: leave empty / default
 ```
 
-If the root directory is not set to `frontend`, Vercel will not detect Next.js. See [`docs/VERCEL_DEPLOYMENT.md`](docs/VERCEL_DEPLOYMENT.md).
+Do not set Output Directory to `public`; this is a Next.js app and Vercel handles the build output automatically. If the root directory is not set to `frontend`, Vercel will not detect Next.js. See [`docs/VERCEL_DEPLOYMENT.md`](docs/VERCEL_DEPLOYMENT.md).
 
 ## Local frontend development
 

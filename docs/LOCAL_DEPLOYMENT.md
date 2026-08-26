@@ -8,10 +8,11 @@ npm ci
 npm run dev
 ```
 
-Vercel should be connected to the GitHub repository and configured with this required monorepo setting:
+Vercel should be connected to the GitHub repository and configured with these required monorepo settings:
 
 ```text
 Root Directory: frontend
+Output Directory: empty/default, not public
 ```
 
 See [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md) for the full Vercel handoff.
