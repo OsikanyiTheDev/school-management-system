@@ -1,44 +1,119 @@
 # SMIS API Design
 
-## Current foundation endpoint
+## Implemented Phase 1 foundation endpoints
 
-| Method | Route | Auth | Purpose |
-| --- | --- | --- | --- |
-| GET | `/health` | Public | Service health check |
+All implemented setup endpoints are designed for API Gateway + Cognito JWT authorization. Terraform wires the authorizer. Handlers also check role and tenant ownership from token claims and/or membership records.
 
-## Planned Phase 1 endpoints
+| Method | Route | Auth | Handler | Purpose |
+| --- | --- | --- | --- | --- |
+| GET | `/health` | Public | `health` | Service health check |
+| POST | `/schools` | PlatformAdmin | `create_school` | Create a school tenant |
+| GET | `/schools/{school_id}` | School member / PlatformAdmin | `get_school` | Get a school profile |
+| POST | `/schools/{school_id}/academic-years` | SchoolAdmin / PlatformAdmin | `create_academic_year` | Create an academic year |
+| POST | `/schools/{school_id}/terms` | SchoolAdmin / PlatformAdmin | `create_term` | Create a term |
+| POST | `/schools/{school_id}/classes` | SchoolAdmin / PlatformAdmin | `create_class` | Create a class |
+| POST | `/schools/{school_id}/subjects` | SchoolAdmin / PlatformAdmin | `create_subject` | Create a subject |
+| POST | `/schools/{school_id}/students` | SchoolAdmin / PlatformAdmin | `create_student` | Create a student profile |
+| POST | `/schools/{school_id}/teachers` | SchoolAdmin / PlatformAdmin | `create_teacher` | Create a teacher profile |
+| POST | `/schools/{school_id}/guardians` | SchoolAdmin / PlatformAdmin | `create_guardian` | Create a parent/guardian profile |
 
-### School setup
+## Example payloads
 
-| Method | Route | Role | Purpose |
-| --- | --- | --- | --- |
-| POST | `/schools` | PlatformAdmin | Create a school tenant |
-| GET | `/schools/{school_id}` | School member | Get school profile |
-| PATCH | `/schools/{school_id}` | SchoolAdmin | Update school settings |
+### Create school
 
-### Academic setup
+```json
+{
+  "name": "Accra Model School",
+  "code": "AMS",
+  "email": "admin@example.edu",
+  "phone": "+233241234567",
+  "address": "Accra, Ghana"
+}
+```
 
-| Method | Route | Role | Purpose |
-| --- | --- | --- | --- |
-| POST | `/schools/{school_id}/academic-years` | SchoolAdmin | Create academic year |
-| POST | `/schools/{school_id}/terms` | SchoolAdmin | Create term |
-| POST | `/schools/{school_id}/classes` | SchoolAdmin | Create class |
-| POST | `/schools/{school_id}/subjects` | SchoolAdmin | Create subject |
-| POST | `/schools/{school_id}/teacher-assignments` | SchoolAdmin | Assign teacher to class/subject |
+### Create academic year
 
-### People
+```json
+{
+  "label": "2026/2027"
+}
+```
 
-| Method | Route | Role | Purpose |
-| --- | --- | --- | --- |
-| POST | `/schools/{school_id}/students` | SchoolAdmin | Create student profile |
-| POST | `/schools/{school_id}/teachers` | SchoolAdmin | Create teacher profile |
-| POST | `/schools/{school_id}/guardians` | SchoolAdmin | Create guardian profile |
-| POST | `/schools/{school_id}/memberships` | SchoolAdmin | Link Cognito user to school role |
+### Create term
+
+```json
+{
+  "academic_year_id": "ayr_abc123",
+  "name": "Term 1",
+  "starts_on": "2026-09-01",
+  "ends_on": "2026-12-18"
+}
+```
+
+### Create class
+
+```json
+{
+  "academic_year_id": "ayr_abc123",
+  "name": "JHS 2A",
+  "level": "JHS 2"
+}
+```
+
+### Create subject
+
+```json
+{
+  "name": "Mathematics",
+  "code": "MATH",
+  "department": "Core"
+}
+```
+
+### Create student
+
+```json
+{
+  "class_id": "cls_abc123",
+  "academic_year_id": "ayr_abc123",
+  "first_name": "Ama",
+  "last_name": "Mensah",
+  "gender": "female",
+  "email": "ama@example.edu",
+  "guardian_ids": ["gdn_abc123"]
+}
+```
+
+### Create teacher
+
+```json
+{
+  "first_name": "Kofi",
+  "last_name": "Owusu",
+  "teacher_number": "T-001",
+  "department": "Science",
+  "email": "kofi@example.edu"
+}
+```
+
+### Create guardian
+
+```json
+{
+  "first_name": "Esi",
+  "last_name": "Mensah",
+  "relationship": "Mother",
+  "phone": "+233241234567",
+  "email": "esi@example.com",
+  "student_ids": ["stu_abc123"]
+}
+```
 
 ## API principles
 
 - All school-owned routes include `school_id`.
 - JWT-protected routes must verify Cognito token claims.
-- Backend authorization must check school membership, not only role names.
-- Public APIs should be minimal.
-- Responses should be explicit and avoid leaking cross-tenant data.
+- Backend authorization checks school membership/tenant access, not only route shape.
+- School-owned data is always written with tenant-scoped DynamoDB keys.
+- Public APIs should remain minimal.
+- Responses should be explicit and avoid leaking internal DynamoDB keys.

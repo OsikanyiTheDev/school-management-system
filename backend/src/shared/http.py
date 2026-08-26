@@ -50,3 +50,8 @@ def parse_json_body(event: dict[str, Any]) -> dict[str, Any]:
     if not isinstance(parsed, dict):
         raise ValueError("request body must be a JSON object")
     return parsed
+
+
+def path_parameter(event: dict[str, Any], name: str) -> str | None:
+    value = (event.get("pathParameters") or {}).get(name)
+    return value if isinstance(value, str) and value else None

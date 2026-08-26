@@ -11,6 +11,51 @@ locals {
       route_key = "GET /health"
       auth      = "NONE"
     }
+    create_school = {
+      handler   = "handlers.create_school.lambda_handler"
+      route_key = "POST /schools"
+      auth      = "JWT"
+    }
+    get_school = {
+      handler   = "handlers.get_school.lambda_handler"
+      route_key = "GET /schools/{school_id}"
+      auth      = "JWT"
+    }
+    create_academic_year = {
+      handler   = "handlers.create_academic_year.lambda_handler"
+      route_key = "POST /schools/{school_id}/academic-years"
+      auth      = "JWT"
+    }
+    create_term = {
+      handler   = "handlers.create_term.lambda_handler"
+      route_key = "POST /schools/{school_id}/terms"
+      auth      = "JWT"
+    }
+    create_class = {
+      handler   = "handlers.create_class.lambda_handler"
+      route_key = "POST /schools/{school_id}/classes"
+      auth      = "JWT"
+    }
+    create_subject = {
+      handler   = "handlers.create_subject.lambda_handler"
+      route_key = "POST /schools/{school_id}/subjects"
+      auth      = "JWT"
+    }
+    create_student = {
+      handler   = "handlers.create_student.lambda_handler"
+      route_key = "POST /schools/{school_id}/students"
+      auth      = "JWT"
+    }
+    create_teacher = {
+      handler   = "handlers.create_teacher.lambda_handler"
+      route_key = "POST /schools/{school_id}/teachers"
+      auth      = "JWT"
+    }
+    create_guardian = {
+      handler   = "handlers.create_guardian.lambda_handler"
+      route_key = "POST /schools/{school_id}/guardians"
+      auth      = "JWT"
+    }
   }
 }
 

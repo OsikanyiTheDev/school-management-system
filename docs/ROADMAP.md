@@ -2,25 +2,25 @@
 
 ## Phase 1 — Foundation
 
-Current milestone:
+Completed so far:
 
 - Repository structure
-- Next.js dashboard shell
+- Next.js dashboard shell at repository root for Vercel
 - Lambda backend foundation
-- Validation and tenant helper tests
+- Validation, ID, repository, tenant and authorization helpers
 - Terraform module foundation
+- API Gateway routes for school setup and people records
 - CI workflow
-- Architecture, security and data-model docs
+- Architecture, security, API and data-model docs
 
 Next Phase 1 increments:
 
 1. Cognito login flow in frontend.
-2. JWT verification and backend authorization helpers.
-3. School setup API.
-4. Academic years and terms API.
-5. Classes and subjects API.
-6. Student, teacher and guardian profile APIs.
-7. Role-aware dashboard route structure.
+2. JWT verification/session handling in the frontend backend-for-frontend layer.
+3. Membership management API for linking users to schools and roles.
+4. Teacher assignment API.
+5. List/get/update endpoints for school setup and people records.
+6. Role-aware dashboard route structure.
 
 ## Phase 2 — Academics
 

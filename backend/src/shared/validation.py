@@ -145,4 +145,105 @@ def validate_student_profile(payload: dict[str, Any]) -> tuple[dict[str, Any], l
     phone = _phone(payload.get("phone"), "phone", errors)
     if phone:
         clean["phone"] = phone
+    for field in ("academic_year_id", "date_of_birth", "enrollment_date", "address"):
+        value = _text(payload.get(field), field, errors, required=False, min_len=0, max_len=160)
+        if value is not None:
+            clean[field] = value
+    guardian_ids = payload.get("guardian_ids", [])
+    if not isinstance(guardian_ids, list) or not all(isinstance(item, str) for item in guardian_ids):
+        errors.append("guardian_ids must be a list of guardian IDs")
+    else:
+        clean["guardian_ids"] = list(dict.fromkeys(guardian_ids))
+    return clean, errors
+
+def validate_term(payload: dict[str, Any]) -> tuple[dict[str, Any], list[str]]:
+    errors: list[str] = []
+    clean: dict[str, Any] = {}
+    for field in ("school_id", "academic_year_id"):
+        value = _text(payload.get(field), field, errors, min_len=5, max_len=80)
+        if value:
+            clean[field] = value
+    name = _text(payload.get("name"), "name", errors, min_len=2, max_len=80)
+    if name:
+        clean["name"] = name
+    status = _choice(payload.get("status", "planned"), "status", TERM_STATUSES, errors)
+    if status:
+        clean["status"] = status
+    for field in ("starts_on", "ends_on"):
+        value = _text(payload.get(field), field, errors, required=False, min_len=0, max_len=32)
+        if value is not None:
+            clean[field] = value
+    return clean, errors
+
+
+def validate_subject(payload: dict[str, Any]) -> tuple[dict[str, Any], list[str]]:
+    errors: list[str] = []
+    clean: dict[str, Any] = {}
+    school_id = _text(payload.get("school_id"), "school_id", errors, min_len=5, max_len=64)
+    if school_id:
+        clean["school_id"] = school_id
+    name = _text(payload.get("name"), "name", errors, min_len=2, max_len=100)
+    if name:
+        clean["name"] = name
+    code = _text(payload.get("code"), "code", errors, required=False, min_len=0, max_len=24)
+    if code is not None:
+        clean["code"] = code.upper().replace(" ", "-")
+    department = _text(payload.get("department"), "department", errors, required=False, min_len=0, max_len=80)
+    if department is not None:
+        clean["department"] = department
+    return clean, errors
+
+
+def validate_teacher_profile(payload: dict[str, Any]) -> tuple[dict[str, Any], list[str]]:
+    errors: list[str] = []
+    clean: dict[str, Any] = {}
+    school_id = _text(payload.get("school_id"), "school_id", errors, min_len=5, max_len=64)
+    if school_id:
+        clean["school_id"] = school_id
+    for field in ("first_name", "last_name"):
+        value = _text(payload.get(field), field, errors, min_len=1, max_len=80)
+        if value:
+            clean[field] = value
+    for field in ("teacher_number", "department", "hire_date", "address"):
+        value = _text(payload.get(field), field, errors, required=False, min_len=0, max_len=160)
+        if value is not None:
+            clean[field] = value
+    email = _email(payload.get("email"), "email", errors)
+    if email:
+        clean["email"] = email
+    phone = _phone(payload.get("phone"), "phone", errors)
+    if phone:
+        clean["phone"] = phone
+    clean["status"] = "active"
+    return clean, errors
+
+
+def validate_guardian_profile(payload: dict[str, Any]) -> tuple[dict[str, Any], list[str]]:
+    errors: list[str] = []
+    clean: dict[str, Any] = {}
+    school_id = _text(payload.get("school_id"), "school_id", errors, min_len=5, max_len=64)
+    if school_id:
+        clean["school_id"] = school_id
+    for field in ("first_name", "last_name"):
+        value = _text(payload.get(field), field, errors, min_len=1, max_len=80)
+        if value:
+            clean[field] = value
+    relationship = _text(payload.get("relationship"), "relationship", errors, required=False, min_len=0, max_len=80)
+    if relationship is not None:
+        clean["relationship"] = relationship
+    address = _text(payload.get("address"), "address", errors, required=False, min_len=0, max_len=200)
+    if address is not None:
+        clean["address"] = address
+    email = _email(payload.get("email"), "email", errors)
+    if email:
+        clean["email"] = email
+    phone = _phone(payload.get("phone"), "phone", errors, required=True)
+    if phone:
+        clean["phone"] = phone
+    student_ids = payload.get("student_ids", [])
+    if not isinstance(student_ids, list) or not all(isinstance(item, str) for item in student_ids):
+        errors.append("student_ids must be a list of student IDs")
+    else:
+        clean["student_ids"] = list(dict.fromkeys(student_ids))
+    clean["status"] = "active"
     return clean, errors

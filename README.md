@@ -85,14 +85,16 @@ This structure keeps the Vercel frontend at the repository root while still sepa
 
 - [x] Repository architecture
 - [x] Frontend foundation and dashboard shell
-- [x] Backend Lambda foundation and validation helpers
+- [x] Backend Lambda foundation, validation, tenant, ID, repository and authorization helpers
 - [x] Multi-tenant data model documentation
-- [x] Terraform module foundation for Cognito, DynamoDB, S3 and API Gateway/Lambda
+- [x] Terraform module foundation for Cognito, DynamoDB, S3 and API Gateway/Lambda routes
 - [x] CI quality workflow
+- [x] School setup APIs
+- [x] Academic year, term, class and subject create APIs
+- [x] Student, parent/guardian and teacher profile create APIs
 - [ ] Cognito-backed application login flow
-- [ ] School setup APIs
-- [ ] Academic year, term, class and subject APIs
-- [ ] Student, parent/guardian and teacher profile APIs
+- [ ] Membership management and role linking APIs
+- [ ] List/get/update APIs for setup and people records
 
 ### Phase 2 — Academics
 
