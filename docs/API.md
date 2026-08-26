@@ -117,3 +117,28 @@ All implemented setup endpoints are designed for API Gateway + Cognito JWT autho
 - School-owned data is always written with tenant-scoped DynamoDB keys.
 - Public APIs should remain minimal.
 - Responses should be explicit and avoid leaking internal DynamoDB keys.
+
+
+## Frontend backend-for-frontend proxy
+
+The frontend includes a strict allowlisted proxy at:
+
+```text
+/api/backend/[...path]
+```
+
+It reads the Cognito access token from the HTTP-only cookie and forwards only approved routes to API Gateway. Browser JavaScript never reads the token directly.
+
+Currently allowed through the proxy:
+
+```text
+POST /api/backend/schools
+GET  /api/backend/schools/{school_id}
+POST /api/backend/schools/{school_id}/academic-years
+POST /api/backend/schools/{school_id}/terms
+POST /api/backend/schools/{school_id}/classes
+POST /api/backend/schools/{school_id}/subjects
+POST /api/backend/schools/{school_id}/students
+POST /api/backend/schools/{school_id}/teachers
+POST /api/backend/schools/{school_id}/guardians
+```

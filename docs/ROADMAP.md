@@ -10,6 +10,7 @@ Completed so far:
 - Validation, ID, repository, tenant and authorization helpers
 - Terraform module foundation
 - API Gateway routes for school setup and people records
+- PlatformAdmin school creation UI
 - CI workflow
 - Architecture, security, API and data-model docs
 

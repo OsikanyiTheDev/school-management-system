@@ -93,6 +93,7 @@ This structure keeps the Vercel frontend at the repository root while still sepa
 - [x] Academic year, term, class and subject create APIs
 - [x] Student, parent/guardian and teacher profile create APIs
 - [x] Cognito-backed application login/logout/session flow
+- [x] PlatformAdmin school creation UI
 - [ ] Membership management and role linking APIs
 - [ ] List/get/update APIs for setup and people records
 

@@ -55,7 +55,9 @@ export function AppShell({ children, session }: { children: React.ReactNode; ses
           </div>
           <div className="topbar-actions">
             <a className="topbar-action" href="#roadmap">View roadmap</a>
-            {session ? (
+            {session?.primaryRole === "platform_admin" ? (
+              <Link className="topbar-action topbar-action-primary" href="/platform">Platform</Link>
+            ) : session ? (
               <Link className="topbar-action topbar-action-primary" href="/account">{session.email ?? "Account"}</Link>
             ) : (
               <Link className="topbar-action topbar-action-primary" href="/auth">Sign in</Link>

@@ -46,6 +46,10 @@ export function getAuthConfig(): AuthConfig | null {
   };
 }
 
+export function getBackendApiUrl(): string | null {
+  return (process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL)?.replace(/\/$/, "") ?? null;
+}
+
 export function authBaseUrl(requestOrigin: string): string {
   return getAuthConfig()?.baseUrl ?? requestOrigin;
 }

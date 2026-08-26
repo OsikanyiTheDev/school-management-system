@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { getAuthConfig, getSession } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
+
 function roleLabel(role: string) {
   return role.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
@@ -26,7 +28,7 @@ export default async function AccountPage() {
               <div><span>User sub</span><strong>{session.sub}</strong></div>
             </div>
             <div className="auth-actions">
-              <Link className="button" href="/">Dashboard</Link>
+              <Link className="button" href={session.primaryRole === "platform_admin" ? "/platform" : "/"}>Dashboard</Link>
               <a className="button button-secondary" href="/api/auth/logout">Sign out</a>
             </div>
           </>

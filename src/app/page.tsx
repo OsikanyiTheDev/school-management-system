@@ -2,6 +2,8 @@ import { AppShell } from "@/components/app-shell";
 import { architectureFlow, dashboardStats, foundationModules, roles } from "@/data/foundation";
 import { getSession } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const session = await getSession();
 

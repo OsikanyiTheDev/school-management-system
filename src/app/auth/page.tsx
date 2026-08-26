@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { getAuthConfig, getSession } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
+
 const errors: Record<string, string> = {
   not_configured: "Authentication is not configured yet. Add the Cognito environment variables in Vercel.",
   invalid_callback: "The sign-in callback could not be verified. Please try again.",
