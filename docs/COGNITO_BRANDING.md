@@ -56,3 +56,22 @@ terraform apply tfplan
 - The Cognito Hosted UI domain remains `https://smis-dev-360831508664.auth.us-east-1.amazoncognito.com`.
 - The frontend `/auth` page is already branded; this CSS customizes the Cognito-hosted screen that opens after clicking sign in.
 - If the CSS does not appear immediately, wait a short moment, clear browser cache, or open the login URL in a private window.
+
+
+## Cognito CSS constraints
+
+Cognito validates Hosted UI CSS against a strict allowlist. Keep selectors simple and individual, for example:
+
+```css
+.label-customizable { ... }
+.textDescription-customizable { ... }
+```
+
+Do not use comma-grouped selectors such as:
+
+```css
+.label-customizable,
+.textDescription-customizable { ... }
+```
+
+Cognito can reject grouped selectors as an invalid class name.

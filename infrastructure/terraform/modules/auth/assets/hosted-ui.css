@@ -1,10 +1,7 @@
 /* SMIS Cognito Hosted UI branding.
-   Keep password entry inside Cognito while matching the app's visual language. */
+   Cognito's CSS validator is strict: use individual allowed class selectors only. */
 .background-customizable {
   background: #f6f8fb !important;
-  background-image:
-    radial-gradient(circle at 16% -12%, rgba(29, 114, 210, 0.16), transparent 32rem),
-    radial-gradient(circle at 92% 6%, rgba(22, 138, 83, 0.15), transparent 30rem) !important;
   color: #102033 !important;
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif !important;
 }
@@ -19,61 +16,64 @@
   max-height: 86px !important;
 }
 
-.label-customizable,
-.textDescription-customizable,
-.idpDescription-customizable,
-.legalText-customizable {
-  color: #102033 !important;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif !important;
-}
-
 .label-customizable {
   margin-bottom: 8px !important;
-  font-size: 0.82rem !important;
+  color: #102033 !important;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif !important;
+  font-size: 14px !important;
   font-weight: 800 !important;
-  letter-spacing: -0.01em !important;
 }
 
-.textDescription-customizable,
+.textDescription-customizable {
+  color: #62748a !important;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif !important;
+  font-size: 14px !important;
+}
+
 .idpDescription-customizable {
   color: #62748a !important;
-  font-size: 0.9rem !important;
-  line-height: 1.55 !important;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif !important;
+  font-size: 14px !important;
+}
+
+.legalText-customizable {
+  color: #62748a !important;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif !important;
+  font-size: 12px !important;
 }
 
 .inputField-customizable {
-  min-height: 46px !important;
+  height: 46px !important;
   border: 1px solid #dbe4ef !important;
   border-radius: 12px !important;
   color: #102033 !important;
   background: #ffffff !important;
   box-shadow: 0 8px 22px rgba(29, 54, 83, 0.05) !important;
-  font-size: 0.96rem !important;
-}
-
-.inputField-customizable:focus {
-  border-color: #1d72d2 !important;
-  box-shadow: 0 0 0 4px rgba(29, 114, 210, 0.12) !important;
+  font-size: 16px !important;
 }
 
 .submitButton-customizable {
-  min-height: 48px !important;
+  height: 48px !important;
   border: 0 !important;
   border-radius: 12px !important;
   color: #ffffff !important;
-  background: linear-gradient(135deg, #1d72d2, #168a53) !important;
+  background: #1d72d2 !important;
   box-shadow: 0 14px 28px rgba(29, 114, 210, 0.24) !important;
   font-weight: 850 !important;
-  letter-spacing: -0.01em !important;
 }
 
-.submitButton-customizable:hover {
-  background: linear-gradient(135deg, #155da9, #127244) !important;
+.idpButton-customizable {
+  height: 46px !important;
+  border: 1px solid #dbe4ef !important;
+  border-radius: 12px !important;
+  color: #102033 !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 22px rgba(29, 54, 83, 0.05) !important;
+  font-weight: 800 !important;
 }
 
-.idpButton-customizable,
 .socialButton-customizable {
-  min-height: 46px !important;
+  height: 46px !important;
   border: 1px solid #dbe4ef !important;
   border-radius: 12px !important;
   color: #102033 !important;
