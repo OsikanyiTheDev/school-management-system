@@ -21,7 +21,10 @@ export default async function AuthPage({ searchParams }: Props) {
         <p className="eyebrow"><span /> Secure access</p>
         <h1>Sign in to SMIS</h1>
         <p>
-          School administrators, teachers, students, parents and finance officers use Cognito verified-email sign-in before accessing tenant data.
+          Users can sign in with email and password.
+        </p>
+        <p className="auth-supporting-copy">
+          Your school dashboard is protected with verified Cognito access before any academic, student or finance data is opened.
         </p>
         {error ? <p className="auth-error">{errors[error] ?? `Authentication error: ${error}`}</p> : null}
         {session ? (

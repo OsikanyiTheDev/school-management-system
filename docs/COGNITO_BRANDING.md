@@ -75,3 +75,8 @@ Do not use comma-grouped selectors such as:
 ```
 
 Cognito can reject grouped selectors as an invalid class name.
+
+
+## Current layout adjustment
+
+The Hosted UI CSS intentionally adds top spacing through `.background-customizable` and `.banner-customizable` so the Cognito form sits lower and feels centered vertically instead of appearing tight to the top of the page.
