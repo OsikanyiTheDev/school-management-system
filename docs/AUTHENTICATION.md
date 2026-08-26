@@ -16,6 +16,25 @@ COGNITO_REGION=us-east-1
 
 These values are not AWS credentials. Do not add AWS access keys or secret keys to Vercel or frontend files.
 
+
+## Branded Cognito screen
+
+The Cognito Hosted UI is themed through Terraform so it matches the SMIS frontend more closely while Cognito remains the password-entry security boundary.
+
+Theme file:
+
+```text
+infrastructure/terraform/modules/auth/assets/hosted-ui.css
+```
+
+Terraform resource:
+
+```text
+aws_cognito_user_pool_ui_customization.web
+```
+
+See [COGNITO_BRANDING.md](COGNITO_BRANDING.md).
+
 ## Browser flow
 
 ```text

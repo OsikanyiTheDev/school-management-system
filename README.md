@@ -226,7 +226,7 @@ terraform apply tfplan
 
 - Never commit AWS credentials, API keys, passwords, tokens or secrets.
 - Terraform defines IAM and AWS resources; it is not applied automatically from GitHub Actions.
-- Cognito groups model application roles.
+- Cognito groups model application roles, and the Cognito Hosted UI is branded through Terraform while Cognito remains the password-entry boundary.
 - Every tenant-owned entity must include a `school_id` and tenant-scoped keys.
 - Backend authorization must enforce both role permissions and tenant ownership.
 - S3 is private by default.
@@ -240,6 +240,7 @@ See [`docs/SECURITY.md`](docs/SECURITY.md).
 - [`docs/DATA_MODEL.md`](docs/DATA_MODEL.md)
 - [`docs/API.md`](docs/API.md)
 - [`docs/AUTHENTICATION.md`](docs/AUTHENTICATION.md)
+- [`docs/COGNITO_BRANDING.md`](docs/COGNITO_BRANDING.md)
 - [`docs/AUTHORIZATION.md`](docs/AUTHORIZATION.md)
 - [`docs/BOOTSTRAP_PLATFORM_ADMIN.md`](docs/BOOTSTRAP_PLATFORM_ADMIN.md)
 - [`docs/ROADMAP.md`](docs/ROADMAP.md)

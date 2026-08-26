@@ -16,7 +16,7 @@ Amazon Cognito is the approved identity provider. The Terraform foundation creat
 - Role groups
 - Custom user attributes for `school_id` and `person_id`
 
-The frontend now uses Cognito Hosted UI authorization code + PKCE. ID/access tokens are stored in short-lived HTTP-only cookies by Next.js route handlers and are not exposed to browser JavaScript.
+The frontend now uses Cognito Hosted UI authorization code + PKCE. ID/access tokens are stored in short-lived HTTP-only cookies by Next.js route handlers and are not exposed to browser JavaScript. Hosted UI branding is presentation-only and does not change the Cognito security boundary.
 
 ## Authorization
 

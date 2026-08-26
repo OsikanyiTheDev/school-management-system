@@ -101,6 +101,12 @@ resource "aws_cognito_user_pool_domain" "main" {
   user_pool_id = aws_cognito_user_pool.main.id
 }
 
+resource "aws_cognito_user_pool_ui_customization" "web" {
+  client_id    = aws_cognito_user_pool_client.web.id
+  user_pool_id = aws_cognito_user_pool.main.id
+  css          = file("${path.module}/assets/hosted-ui.css")
+}
+
 resource "aws_cognito_user_group" "roles" {
   for_each     = local.groups
   name         = each.key
