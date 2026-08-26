@@ -21,17 +21,17 @@ module "auth" {
 }
 
 module "api" {
-  source                         = "../../modules/api"
-  name_prefix                    = local.name_prefix
-  lambda_source_dir              = "${path.root}/../../../../backend/src"
-  allowed_origins                = var.allowed_origins
-  log_retention_days             = var.log_retention_days
-  table_name                     = module.data_store.table_name
-  table_arn                      = module.data_store.table_arn
-  media_bucket_name              = module.media_storage.bucket_name
-  media_bucket_arn               = module.media_storage.bucket_arn
-  cognito_user_pool_id           = module.auth.user_pool_id
-  cognito_user_pool_client_id    = module.auth.user_pool_client_id
-  cognito_user_pool_issuer       = module.auth.issuer
-  environment                    = var.environment
+  source                      = "../../modules/api"
+  name_prefix                 = local.name_prefix
+  lambda_source_dir           = "${path.root}/../../../../backend/src"
+  allowed_origins             = var.allowed_origins
+  log_retention_days          = var.log_retention_days
+  table_name                  = module.data_store.table_name
+  table_arn                   = module.data_store.table_arn
+  media_bucket_name           = module.media_storage.bucket_name
+  media_bucket_arn            = module.media_storage.bucket_arn
+  cognito_user_pool_id        = module.auth.user_pool_id
+  cognito_user_pool_client_id = module.auth.user_pool_client_id
+  cognito_user_pool_issuer    = module.auth.issuer
+  environment                 = var.environment
 }

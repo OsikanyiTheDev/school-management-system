@@ -1,9 +1,9 @@
 locals {
   groups = {
-    PlatformAdmin = "Platform-level operators for future SaaS administration."
-    SchoolAdmin   = "School administrators with full tenant management access."
-    Teacher       = "Teachers with assigned class and subject access."
-    Student       = "Students with self-service academic and finance visibility."
+    PlatformAdmin  = "Platform-level operators for future SaaS administration."
+    SchoolAdmin    = "School administrators with full tenant management access."
+    Teacher        = "Teachers with assigned class and subject access."
+    Student        = "Students with self-service academic and finance visibility."
     ParentGuardian = "Parents/guardians with child-linked visibility."
     FinanceOfficer = "Finance officers with fee, invoice and payment access."
   }

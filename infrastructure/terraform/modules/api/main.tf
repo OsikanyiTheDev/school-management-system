@@ -97,9 +97,9 @@ resource "aws_iam_role_policy" "data_access" {
         Resource = [var.table_arn, "${var.table_arn}/index/*"]
       },
       {
-        Sid    = "PrivateDocumentAccess"
-        Effect = "Allow"
-        Action = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"]
+        Sid      = "PrivateDocumentAccess"
+        Effect   = "Allow"
+        Action   = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"]
         Resource = ["${var.media_bucket_arn}/schools/*"]
       }
     ]
