@@ -1,13 +1,13 @@
 # Vercel Deployment
 
-This repository is a monorepo. The Next.js application lives in `frontend/`, not the repository root.
+The Next.js frontend now lives at the repository root, so Vercel can build the project from `./`.
 
 ## Required Vercel settings
 
-When importing `OsikanyiTheDev/school-management-system` into Vercel, use these exact settings:
+When importing `OsikanyiTheDev/school-management-system` into Vercel, use these settings:
 
 ```text
-Root Directory: frontend
+Root Directory: ./
 Framework Preset: Next.js
 Install Command: npm ci
 Build Command: npm run build
@@ -20,16 +20,12 @@ Important: **do not set Output Directory to `public`**. This is a Next.js app, n
 
 ### Error: No Next.js version detected
 
-```text
-No Next.js version detected. Make sure your package.json has "next"...
-```
+Cause: Vercel is not building from the directory that contains `package.json`.
 
-Cause: Vercel is building the repository root instead of `frontend/`.
-
-Fix:
+Fix: after this flattening change, use the repository root:
 
 ```text
-Settings → General → Root Directory → frontend
+Settings → General → Root Directory → ./
 ```
 
 ### Error: No Output Directory named "public" found
@@ -60,10 +56,10 @@ In Vercel:
 
 1. Open the SMIS project.
 2. Go to **Settings → General**.
-3. Set **Root Directory** to:
+3. Set **Root Directory** to the repository root:
 
 ```text
-frontend
+./
 ```
 
 4. Go to **Settings → Build and Deployment**.

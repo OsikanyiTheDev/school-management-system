@@ -3,15 +3,14 @@
 ## Frontend
 
 ```bash
-cd frontend
 npm ci
 npm run dev
 ```
 
-Vercel should be connected to the GitHub repository and configured with these required monorepo settings:
+Vercel should be connected to the GitHub repository and configured with these settings:
 
 ```text
-Root Directory: frontend
+Root Directory: ./
 Output Directory: empty/default, not public
 ```
 

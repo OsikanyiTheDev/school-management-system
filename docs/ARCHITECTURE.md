@@ -39,7 +39,7 @@ GitHub Actions can validate Terraform, but it must not apply infrastructure in t
 
 ## Frontend approach
 
-The frontend is a Next.js TypeScript application under `frontend/`. It will evolve into a role-aware dashboard with:
+The frontend is a Next.js TypeScript application at the repository root under `src/`. It will evolve into a role-aware dashboard with:
 
 - School administrator navigation
 - Teacher workspace

@@ -58,11 +58,10 @@ AWS infrastructure is managed with Terraform, but Terraform is **not** applied f
 
 ```text
 school-management-system/
-├── frontend/                         # Next.js TypeScript app for Vercel
-│   └── src/
-│       ├── app/                      # App Router pages and global CSS
-│       ├── components/               # Reusable UI components
-│       └── data/                     # Static module/role metadata for foundation UI
+├── src/                              # Next.js App Router frontend for Vercel
+│   ├── app/                          # App Router pages and global CSS
+│   ├── components/                   # Reusable UI components
+│   └── data/                         # Static module/role metadata for foundation UI
 ├── backend/                          # Lambda handlers and shared backend logic
 │   ├── src/
 │   │   ├── handlers/                 # Lambda entry points
@@ -78,7 +77,7 @@ school-management-system/
 └── .gitignore
 ```
 
-This structure separates frontend deployment, backend Lambda code and Terraform infrastructure so Vercel and local AWS provisioning can remain independent.
+This structure keeps the Vercel frontend at the repository root while still separating backend Lambda code and Terraform infrastructure. Vercel can build from `./`, while AWS provisioning remains local-only through Terraform.
 
 ## Phase roadmap
 
@@ -137,24 +136,23 @@ This structure separates frontend deployment, backend Lambda code and Terraform 
 
 ## Vercel deployment
 
-This is a monorepo. The Next.js app is inside `frontend/`.
+The Next.js app now lives at the repository root, so Vercel can use `./`.
 
 When importing into Vercel, set:
 
 ```text
-Root Directory: frontend
+Root Directory: ./
 Framework Preset: Next.js
 Install Command: npm ci
 Build Command: npm run build
 Output Directory: leave empty / default
 ```
 
-Do not set Output Directory to `public`; this is a Next.js app and Vercel handles the build output automatically. If the root directory is not set to `frontend`, Vercel will not detect Next.js. See [`docs/VERCEL_DEPLOYMENT.md`](docs/VERCEL_DEPLOYMENT.md).
+Do not set Output Directory to `public`; this is a Next.js app and Vercel handles the build output automatically. See [`docs/VERCEL_DEPLOYMENT.md`](docs/VERCEL_DEPLOYMENT.md).
 
 ## Local frontend development
 
 ```bash
-cd frontend
 npm ci
 npm run dev
 ```
@@ -164,7 +162,6 @@ Open <http://localhost:3000>.
 Quality checks:
 
 ```bash
-cd frontend
 npm run lint
 npm run typecheck
 npm run build
