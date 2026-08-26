@@ -135,6 +135,22 @@ This structure separates frontend deployment, backend Lambda code and Terraform 
 - Stronger tenant isolation controls
 - Subscription architecture
 
+## Vercel deployment
+
+This is a monorepo. The Next.js app is inside `frontend/`.
+
+When importing into Vercel, set:
+
+```text
+Root Directory: frontend
+Framework Preset: Next.js
+Install Command: npm ci
+Build Command: npm run build
+Output Directory: leave blank
+```
+
+If the root directory is not set to `frontend`, Vercel will not detect Next.js. See [`docs/VERCEL_DEPLOYMENT.md`](docs/VERCEL_DEPLOYMENT.md).
+
 ## Local frontend development
 
 ```bash

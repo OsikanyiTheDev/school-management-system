@@ -8,7 +8,13 @@ npm ci
 npm run dev
 ```
 
-Vercel should be connected to the GitHub repository and configured with `frontend` as the project root if this monorepo structure is used.
+Vercel should be connected to the GitHub repository and configured with this required monorepo setting:
+
+```text
+Root Directory: frontend
+```
+
+See [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md) for the full Vercel handoff.
 
 ## Backend tests
 
