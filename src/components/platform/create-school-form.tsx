@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 
 type Notice = { kind: "success" | "error"; message: string } | null;
@@ -90,6 +91,7 @@ export function CreateSchoolForm() {
           <span>New school ID</span>
           <strong>{createdSchoolId}</strong>
           <small>Use this tenant ID for academic years, terms, classes and people records.</small>
+          <Link className="setup-next-link" href={`/platform/schools/${createdSchoolId}/setup`}>Continue to academic setup</Link>
         </div>
       ) : null}
     </form>

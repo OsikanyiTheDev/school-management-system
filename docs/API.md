@@ -142,3 +142,21 @@ POST /api/backend/schools/{school_id}/students
 POST /api/backend/schools/{school_id}/teachers
 POST /api/backend/schools/{school_id}/guardians
 ```
+
+
+## Academic setup UI flow
+
+The PlatformAdmin flow now links a created school tenant to:
+
+```text
+/platform/schools/{school_id}/setup
+```
+
+That page creates:
+
+1. Academic year
+2. Term
+3. Class
+4. Subject
+
+The page displays generated IDs so later people, attendance, grading and finance flows can connect to the correct tenant records.

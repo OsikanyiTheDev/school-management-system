@@ -11,6 +11,7 @@ Completed so far:
 - Terraform module foundation
 - API Gateway routes for school setup and people records
 - PlatformAdmin school creation UI
+- Academic setup UI for academic years, terms, classes and subjects
 - CI workflow
 - Architecture, security, API and data-model docs
 
