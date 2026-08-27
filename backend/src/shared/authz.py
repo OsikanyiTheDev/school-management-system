@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+import re
 from typing import Any, Iterable
 
 from .repository import SmisRepository
@@ -29,12 +31,31 @@ def caller_sub(event: dict[str, Any]) -> str | None:
     return value if isinstance(value, str) and value else None
 
 
+def _clean_group(value: Any) -> str | None:
+    if not isinstance(value, str):
+        return None
+    cleaned = value.strip().strip("'\"")
+    return cleaned or None
+
+
 def caller_groups(event: dict[str, Any]) -> tuple[str, ...]:
     value = claims(event).get("cognito:groups", [])
-    if isinstance(value, str):
-        return tuple(group for group in value.replace(",", " ").split() if group)
     if isinstance(value, list):
-        return tuple(group for group in value if isinstance(group, str))
+        return tuple(group for group in (_clean_group(item) for item in value) if group)
+    if isinstance(value, str):
+        stripped = value.strip()
+        if stripped.startswith("["):
+            try:
+                parsed = json.loads(stripped)
+            except json.JSONDecodeError:
+                parsed = None
+            if isinstance(parsed, list):
+                return tuple(group for group in (_clean_group(item) for item in parsed) if group)
+        return tuple(
+            group
+            for group in (_clean_group(part) for part in re.split(r"[\s,]+", stripped.strip("[]")))
+            if group
+        )
     return ()
 
 

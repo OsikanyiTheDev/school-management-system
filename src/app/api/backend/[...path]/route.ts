@@ -30,8 +30,11 @@ async function proxy(request: NextRequest, context: { params: Promise<{ path: st
     return NextResponse.json({ error: "route_not_allowed" }, { status: 404 });
   }
 
-  const accessToken = (await cookies()).get(AUTH_COOKIES.access)?.value;
-  if (!accessToken) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  const cookieStore = await cookies();
+  const idToken = cookieStore.get(AUTH_COOKIES.id)?.value;
+  const accessToken = cookieStore.get(AUTH_COOKIES.access)?.value;
+  const forwardedToken = idToken ?? accessToken;
+  if (!forwardedToken) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
   const target = new URL(`${apiUrl}/${path}`);
   request.nextUrl.searchParams.forEach((value, key) => target.searchParams.append(key, value));
@@ -41,7 +44,7 @@ async function proxy(request: NextRequest, context: { params: Promise<{ path: st
     const upstream = await fetch(target, {
       method: request.method,
       headers: {
-        authorization: `Bearer ${accessToken}`,
+        authorization: `Bearer ${forwardedToken}`,
         ...(body ? { "content-type": request.headers.get("content-type") ?? "application/json" } : {}),
       },
       body,

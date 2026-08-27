@@ -20,6 +20,13 @@ class AuthzTests(unittest.TestCase):
     def test_group_parsing_from_string(self):
         self.assertEqual(authz.caller_groups(event("SchoolAdmin Teacher")), ("SchoolAdmin", "Teacher"))
 
+
+    def test_group_parsing_from_json_string(self):
+        self.assertEqual(authz.caller_groups(event('["PlatformAdmin", "SchoolAdmin"]')), ("PlatformAdmin", "SchoolAdmin"))
+
+    def test_group_parsing_from_bracket_string(self):
+        self.assertEqual(authz.caller_groups(event('[PlatformAdmin]')), ("PlatformAdmin",))
+
     def test_platform_admin_can_manage_any_school(self):
         self.assertTrue(authz.can_manage_school(event(["PlatformAdmin"]), "sch_any"))
 

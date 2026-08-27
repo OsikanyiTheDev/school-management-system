@@ -127,7 +127,7 @@ The frontend includes a strict allowlisted proxy at:
 /api/backend/[...path]
 ```
 
-It reads the Cognito access token from the HTTP-only cookie and forwards only approved routes to API Gateway. Browser JavaScript never reads the token directly.
+It reads Cognito tokens from HTTP-only cookies and forwards a verified Cognito JWT only for approved routes to API Gateway. Browser JavaScript never reads the token directly. The proxy currently prefers the ID token so Lambda receives the same role/group claims displayed in `/api/auth/session`.
 
 Currently allowed through the proxy:
 
