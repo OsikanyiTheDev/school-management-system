@@ -205,3 +205,33 @@ def build_person(clean: dict[str, Any], *, person_type: str, id_prefix: str, cre
             }
         )
     return {key: value for key, value in item.items() if value is not None}
+
+
+def build_teacher_assignment(clean: dict[str, Any], *, created_by: str) -> dict[str, Any]:
+    school_id = clean["school_id"]
+    assignment_id = clean.get("assignment_id") or new_entity_id("asg")
+    item = base_item(
+        pk=tenant_pk(school_id, "teacher_assignment"),
+        sk=entity_sk(assignment_id),
+        school_id=school_id,
+        entity_type="teacher_assignment",
+        entity_id=assignment_id,
+    )
+    item.update(
+        {
+            "assignment_id": assignment_id,
+            "academic_year_id": clean["academic_year_id"],
+            "term_id": clean["term_id"],
+            "class_id": clean["class_id"],
+            "subject_id": clean["subject_id"],
+            "teacher_id": clean["teacher_id"],
+            "status": clean.get("status", "active"),
+            "note": clean.get("note"),
+            "created_by": created_by,
+            "GSI1PK": f"SCHOOL#{school_id}#TEACHER_ASSIGNMENT",
+            "GSI1SK": f"{clean['academic_year_id']}#{clean['term_id']}#{clean['class_id']}#{clean['subject_id']}#{clean['teacher_id']}",
+            "GSI3PK": f"SCHOOL#{school_id}#TEACHING_LOAD",
+            "GSI3SK": f"TEACHER#{clean['teacher_id']}#{clean['academic_year_id']}#{clean['term_id']}",
+        }
+    )
+    return {key: value for key, value in item.items() if value is not None}

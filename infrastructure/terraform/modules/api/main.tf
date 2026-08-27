@@ -56,6 +56,11 @@ locals {
       route_key = "POST /schools/{school_id}/guardians"
       auth      = "JWT"
     }
+    create_teacher_assignment = {
+      handler   = "handlers.create_teacher_assignment.lambda_handler"
+      route_key = "POST /schools/{school_id}/teacher-assignments"
+      auth      = "JWT"
+    }
   }
 }
 

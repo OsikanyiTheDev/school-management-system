@@ -13,6 +13,7 @@ Completed so far:
 - PlatformAdmin school creation UI
 - Academic setup UI for academic years, terms, classes and subjects
 - People management UI for teachers, guardians and students
+- Teacher assignment API and UI flow
 - CI workflow
 - Architecture, security, API and data-model docs
 

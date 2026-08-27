@@ -247,3 +247,19 @@ def validate_guardian_profile(payload: dict[str, Any]) -> tuple[dict[str, Any], 
         clean["student_ids"] = list(dict.fromkeys(student_ids))
     clean["status"] = "active"
     return clean, errors
+
+
+def validate_teacher_assignment(payload: dict[str, Any]) -> tuple[dict[str, Any], list[str]]:
+    errors: list[str] = []
+    clean: dict[str, Any] = {}
+    for field in ("school_id", "academic_year_id", "term_id", "class_id", "subject_id", "teacher_id"):
+        value = _text(payload.get(field), field, errors, min_len=5, max_len=80)
+        if value:
+            clean[field] = value
+    status = _choice(payload.get("status", "active"), "status", {"active", "inactive"}, errors)
+    if status:
+        clean["status"] = status
+    note = _text(payload.get("note"), "note", errors, required=False, min_len=0, max_len=300)
+    if note is not None:
+        clean["note"] = note
+    return clean, errors

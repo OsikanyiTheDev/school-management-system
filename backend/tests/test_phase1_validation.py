@@ -4,7 +4,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from shared.validation import validate_guardian_profile, validate_subject, validate_teacher_profile, validate_term
+from shared.validation import validate_guardian_profile, validate_subject, validate_teacher_assignment, validate_teacher_profile, validate_term
 
 
 class Phase1ValidationTests(unittest.TestCase):
@@ -26,6 +26,25 @@ class Phase1ValidationTests(unittest.TestCase):
     def test_guardian_requires_phone(self):
         _, errors = validate_guardian_profile({"school_id": "sch_acme", "first_name": "Esi", "last_name": "Mensah"})
         self.assertTrue(any("phone" in error for error in errors))
+
+    def test_teacher_assignment_validation(self):
+        clean, errors = validate_teacher_assignment(
+            {
+                "school_id": "sch_acme",
+                "academic_year_id": "ayr_001",
+                "term_id": "term_001",
+                "class_id": "cls_001",
+                "subject_id": "subj_001",
+                "teacher_id": "tch_001",
+            }
+        )
+        self.assertEqual(errors, [])
+        self.assertEqual(clean["status"], "active")
+
+    def test_teacher_assignment_requires_core_ids(self):
+        _, errors = validate_teacher_assignment({"school_id": "sch_acme"})
+        self.assertTrue(any("teacher_id" in error for error in errors))
+        self.assertTrue(any("class_id" in error for error in errors))
 
 
 if __name__ == "__main__":

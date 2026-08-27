@@ -7,14 +7,14 @@ export const runtime = "nodejs";
 const ALLOWED_PATHS = [
   /^schools$/,
   /^schools\/[A-Za-z0-9_-]+$/,
-  /^schools\/[A-Za-z0-9_-]+\/(academic-years|terms|classes|subjects|students|teachers|guardians)$/,
+  /^schools\/[A-Za-z0-9_-]+\/(academic-years|terms|classes|subjects|students|teachers|guardians|teacher-assignments)$/,
 ];
 
 const METHOD_RULES: Record<string, RegExp[]> = {
   GET: [/^schools\/[A-Za-z0-9_-]+$/],
   POST: [
     /^schools$/,
-    /^schools\/[A-Za-z0-9_-]+\/(academic-years|terms|classes|subjects|students|teachers|guardians)$/,
+    /^schools\/[A-Za-z0-9_-]+\/(academic-years|terms|classes|subjects|students|teachers|guardians|teacher-assignments)$/,
   ],
 };
 

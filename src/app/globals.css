@@ -645,3 +645,20 @@ main { width: min(1180px, calc(100% - 64px)); margin: 0 auto; padding-bottom: 80
     min-height: auto;
   }
 }
+
+.assignment-layout .platform-panel-heading small {
+  color: var(--blue);
+  background: var(--blue-soft);
+}
+
+.assignment-form {
+  max-width: 860px;
+}
+
+.assignment-result-box {
+  background: var(--green-soft);
+}
+
+.assignment-result-box strong {
+  color: var(--green);
+}

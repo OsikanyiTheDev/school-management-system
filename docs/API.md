@@ -16,6 +16,7 @@ All implemented setup endpoints are designed for API Gateway + Cognito JWT autho
 | POST | `/schools/{school_id}/students` | SchoolAdmin / PlatformAdmin | `create_student` | Create a student profile |
 | POST | `/schools/{school_id}/teachers` | SchoolAdmin / PlatformAdmin | `create_teacher` | Create a teacher profile |
 | POST | `/schools/{school_id}/guardians` | SchoolAdmin / PlatformAdmin | `create_guardian` | Create a parent/guardian profile |
+| POST | `/schools/{school_id}/teacher-assignments` | SchoolAdmin / PlatformAdmin | `create_teacher_assignment` | Assign a teacher to class/subject/term |
 
 ## Example payloads
 
@@ -141,6 +142,7 @@ POST /api/backend/schools/{school_id}/subjects
 POST /api/backend/schools/{school_id}/students
 POST /api/backend/schools/{school_id}/teachers
 POST /api/backend/schools/{school_id}/guardians
+POST /api/backend/schools/{school_id}/teacher-assignments
 ```
 
 
@@ -183,3 +185,26 @@ That page creates separate tenant-scoped records for:
 3. Students
 
 The generated IDs are displayed because later modules use them for teacher assignments, guardian/student relationships, attendance, grades, invoices, payments and results.
+
+
+## Teacher assignment UI flow
+
+Teacher assignments are created from:
+
+```text
+/platform/schools/{school_id}/assignments
+```
+
+The page accepts optional query parameters for prefilled IDs:
+
+```text
+/platform/schools/{school_id}/assignments?academicYearId={academic_year_id}&termId={term_id}&classId={class_id}&subjectId={subject_id}&teacherId={teacher_id}
+```
+
+The assignment connects:
+
+```text
+teacher_id + class_id + subject_id + term_id + academic_year_id + school_id
+```
+
+This is the bridge for teacher dashboards, class attendance, grade entry and subject reports.

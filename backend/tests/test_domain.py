@@ -4,7 +4,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from shared.domain import build_academic_year, build_class, build_person, build_school, build_subject, build_term
+from shared.domain import build_academic_year, build_class, build_person, build_school, build_subject, build_teacher_assignment, build_term
 
 
 class DomainItemTests(unittest.TestCase):
@@ -60,6 +60,24 @@ class DomainItemTests(unittest.TestCase):
         self.assertEqual(student["PK"], "SCHOOL#sch_acme_ghana#STUDENT")
         self.assertEqual(teacher["PK"], "SCHOOL#sch_acme_ghana#TEACHER")
         self.assertEqual(guardian["PK"], "SCHOOL#sch_acme_ghana#GUARDIAN")
+
+    def test_teacher_assignment_item_is_tenant_scoped(self):
+        item = build_teacher_assignment(
+            {
+                "school_id": "sch_acme_ghana",
+                "academic_year_id": "ayr_001",
+                "term_id": "term_001",
+                "class_id": "cls_jhs2a",
+                "subject_id": "subj_math",
+                "teacher_id": "tch_001",
+            },
+            created_by="user-1",
+        )
+        self.assertEqual(item["PK"], "SCHOOL#sch_acme_ghana#TEACHER_ASSIGNMENT")
+        self.assertEqual(item["entity_type"], "teacher_assignment")
+        self.assertTrue(item["assignment_id"].startswith("asg_"))
+        self.assertEqual(item["GSI1PK"], "SCHOOL#sch_acme_ghana#TEACHER_ASSIGNMENT")
+        self.assertEqual(item["GSI3PK"], "SCHOOL#sch_acme_ghana#TEACHING_LOAD")
 
 
 if __name__ == "__main__":

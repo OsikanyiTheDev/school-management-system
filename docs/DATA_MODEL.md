@@ -179,6 +179,9 @@ updated_at
 ### Teacher assignment
 
 ```text
+PK = SCHOOL#{school_id}#TEACHER_ASSIGNMENT
+SK = ID#{assignment_id}
+
 assignment_id
 school_id
 academic_year_id
@@ -187,6 +190,10 @@ class_id
 subject_id
 teacher_id
 status
+note
+created_by
+created_at
+updated_at
 ```
 
 ### Attendance

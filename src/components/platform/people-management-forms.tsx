@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 
 type Notice = { kind: "success" | "error"; message: string } | null;
@@ -187,6 +188,11 @@ export function PeopleManagementForms({
           <ResultBox label="Current class" value={classId} helper="Default class ID for new students." />
         </div>
         {notice ? <p className={`form-notice ${notice.kind}`}>{notice.message}</p> : null}
+        {teacherId ? (
+          <Link className="setup-next-link" href={`/platform/schools/${schoolId}/assignments?academicYearId=${encodeURIComponent(academicYearId)}&classId=${encodeURIComponent(classId)}&teacherId=${encodeURIComponent(teacherId)}`}>
+            Continue to teacher assignment
+          </Link>
+        ) : null}
       </section>
 
       <div className="people-grid">
