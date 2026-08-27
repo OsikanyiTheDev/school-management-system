@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 
 type Notice = { kind: "success" | "error"; message: string } | null;
@@ -184,6 +185,11 @@ export function AcademicSetupForms({ schoolId }: { schoolId: string }) {
           <ResultBox label="Subject ID" value={subjectId} helper="Used by assignments, exams and grades." />
         </div>
         {notice ? <p className={`form-notice ${notice.kind}`}>{notice.message}</p> : null}
+        {academicYearId && classId ? (
+          <Link className="setup-next-link" href={`/platform/schools/${schoolId}/people?academicYearId=${encodeURIComponent(academicYearId)}&classId=${encodeURIComponent(classId)}`}>
+            Continue to people management
+          </Link>
+        ) : null}
       </section>
 
       <div className="setup-grid">

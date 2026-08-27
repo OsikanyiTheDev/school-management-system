@@ -12,6 +12,7 @@ Completed so far:
 - API Gateway routes for school setup and people records
 - PlatformAdmin school creation UI
 - Academic setup UI for academic years, terms, classes and subjects
+- People management UI for teachers, guardians and students
 - CI workflow
 - Architecture, security, API and data-model docs
 

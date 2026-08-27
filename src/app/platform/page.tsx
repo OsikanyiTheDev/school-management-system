@@ -60,7 +60,7 @@ export default async function PlatformPage() {
                 <li>Add teachers, students and guardians.</li>
                 <li>Link users to school roles.</li>
               </ol>
-              <p>Only the school profile is created in this step. Academic setup comes next.</p>
+              <p>Only the school profile is created in this step. Academic setup and people management come next.</p>
             </aside>
           </div>
         )}

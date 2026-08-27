@@ -160,3 +160,26 @@ That page creates:
 4. Subject
 
 The page displays generated IDs so later people, attendance, grading and finance flows can connect to the correct tenant records.
+
+
+## People management UI flow
+
+The platform setup flow now includes:
+
+```text
+/platform/schools/{school_id}/people
+```
+
+Optional query parameters can prefill academic context:
+
+```text
+/platform/schools/{school_id}/people?academicYearId={academic_year_id}&classId={class_id}
+```
+
+That page creates separate tenant-scoped records for:
+
+1. Teachers
+2. Guardians / parents
+3. Students
+
+The generated IDs are displayed because later modules use them for teacher assignments, guardian/student relationships, attendance, grades, invoices, payments and results.
